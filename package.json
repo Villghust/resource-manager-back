@@ -1,0 +1,29 @@
+{
+  "type": "module",
+  "name": "resource-manager-back",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Villghust/resource-manager-back.git",
+  "author": "Márcio Santos do Carmo <m.s.carmo@outlook.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "node src/server.js",
+    "start": "node --require dotenv/config src/server.js",
+    "dev:debug": "nodemon --inspect src/server.js",
+    "lint": "eslint --fix src --ext .js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.9",
+    "yup": "^0.28.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-prettier": "^3.1.3",
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.4"
+  }
+}
