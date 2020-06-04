@@ -9,18 +9,18 @@ class ResourceController {
     async store(req, res) {
         const schema = Yup.object().shape({
             name: Yup.string().required(),
-            type: Yup.mixed().oneOf(ResourceType.values()).require(),
-            cost: Yup.when('type', (type) =>
+            type: Yup.mixed().oneOf(ResourceType.values()).required(),
+            cost: Yup.number().when('type', (type) =>
                 type === ResourceType.PHYSICAL_SPACES
                     ? Yup.number().nullable()
                     : Yup.number().required()
             ),
-            size: Yup.when('type', (type) =>
+            size: Yup.number().when('type', (type) =>
                 type === ResourceType.PHYSICAL_SPACES
                     ? Yup.number().required()
                     : Yup.number().nullable()
             ),
-            seat_quantity: Yup.when('type', (type) =>
+            seat_quantity: Yup.number().when('type', (type) =>
                 type === ResourceType.PHYSICAL_SPACES
                     ? Yup.number().required()
                     : Yup.number().nullable()

@@ -23,13 +23,13 @@ class UserController {
             return res.status(422).json({ error: 'User already exists' });
         }
 
-        const { _id } = await User.create({
+        const user = await User.create({
             name,
             email,
             registration,
         });
 
-        return res.status(201).json({ _id, name, email, registration });
+        return res.status(201).json(user);
     }
 
     async list(req, res) {

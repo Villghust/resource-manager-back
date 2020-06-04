@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 import ResourceType from '../enums/ResourceTypeEnum.js';
 
 const ResourceSchema = new mongoose.Schema(

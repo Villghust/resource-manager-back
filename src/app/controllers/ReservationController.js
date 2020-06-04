@@ -20,7 +20,7 @@ class ReservationController {
                 .required(),
             resource_type: Yup.string().required(),
             startDate: Yup.date().min(moment()._d).required(),
-            endDate: Yup.when('resource_type', (type) =>
+            endDate: Yup.date().when('resource_type', (type) =>
                 type === ResourceType.FURNITURE
                     ? Yup.date().min(moment().add(4, 'd')._d).required()
                     : Yup.date().min(moment().add(1, 'd')._d).required()
@@ -51,7 +51,7 @@ class ReservationController {
     async list(req, res) {
         let { startDate, endDate } = req.query;
 
-        // if (!startDate && !endDate)
+        // Se tiver startDate e endDate, listamos por periodo. Caso contrário tudo.
 
         // moment(startDate).isBetween()
 
