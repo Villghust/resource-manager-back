@@ -14,7 +14,7 @@ routes.get('/resources', ResourceController.list);
 
 routes.post('/reservations', ReservationController.store);
 routes.get('/reservations/available', ReservationController.available);
-routes.get('/reservations/unavailable', ReservationController.unavailable);
+routes.get('/reservations/list', ReservationController.list);
 routes.get(
     '/reservations/resources/:resource_id',
     ReservationController.resources

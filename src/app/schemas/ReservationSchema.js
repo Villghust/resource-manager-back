@@ -12,13 +12,20 @@ const ReservationSchema = new mongoose.Schema(
             ref: 'Resource',
             required: true,
         },
+        resource_type: {
+            type: String,
+            required: true,
+        },
         startDate: {
             type: Date,
             required: true,
         },
-        duration: {
+        endDate: {
             type: Number,
             required: true,
+        },
+        total_cost: {
+            type: Number,
         },
     },
     {
