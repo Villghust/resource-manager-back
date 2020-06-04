@@ -20,7 +20,7 @@ class UserController {
         const userByRegistration = await User.findOne({ registration });
 
         if (userByEmail || userByRegistration) {
-            return res.status(400).json({ error: 'User already exists' });
+            return res.status(422).json({ error: 'User already exists' });
         }
 
         const { _id } = await User.create({
@@ -33,7 +33,7 @@ class UserController {
     }
 
     async list(req, res) {
-        const users = await User.find({}).sort({ name: 'asc' }).limit(20);
+        const users = await User.find({}).sort({ name: 'asc' });
 
         return res.status(200).json({ users });
     }

@@ -6,13 +6,13 @@ mocksIniciais: 5 Colaboradores e 10 Recursos
 
 ### User
 
-- ? criar colaborador
-- ? lista de colaboradores
+- ! criar colaborador
+- ! lista de colaboradores
 
 ### Resource
 
-- ? criar recurso
-- ? lista de recursos por tipo
+- ! criar recurso
+- ! lista de recursos por tipo
 
 ### Reservation
 - ? criar reserva
