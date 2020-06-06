@@ -1,10 +1,10 @@
 import Yup from 'yup';
 
+import ResourceType from '../enums/ResourceTypeEnum.js';
+
 import Cost from '../schemas/CostSchema.js';
 import Reservation from '../schemas/ReservationSchema.js';
 import Resource from '../schemas/ResourceSchema.js';
-
-import ResourceType from '../enums/ResourceTypeEnum.js';
 
 class ResourceController {
     async store(req, res) {

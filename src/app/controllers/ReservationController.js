@@ -1,11 +1,11 @@
 import Yup from 'yup';
 import moment from 'moment';
 
+import ResourceType from '../enums/ResourceTypeEnum.js';
+
 import Cost from '../schemas/CostSchema.js';
 import Reservation from '../schemas/ReservationSchema.js';
 import Resources from '../schemas/ResourceSchema.js';
-
-import ResourceType from '../enums/ResourceTypeEnum.js';
 
 class ReservationController {
     async store(req, res) {
