@@ -1,5 +1,6 @@
 import Yup from 'yup';
 
+import Reservation from '../schemas/ReservationSchema.js';
 import User from '../schemas/UserSchema.js';
 
 class UserController {
@@ -11,7 +12,7 @@ class UserController {
         });
 
         if (!(await schema.isValid(req.body))) {
-            return res.status(400).json({ error: 'Validation fails' });
+            return res.status(400).json({ error: 'Contract validation fails' });
         }
 
         const { name, email, registration } = req.body;
@@ -36,6 +37,35 @@ class UserController {
         const users = await User.find({}).sort({ name: 'asc' });
 
         return res.status(200).json({ users });
+    }
+
+    async totalCost(req, res) {
+        const reservations = await Reservation.find({}).populate(['user']);
+
+        let users = {};
+
+        for (const reservation of reservations) {
+            const { user, total_cost } = reservation;
+
+            const { id, name, email, registration } = user;
+
+            if (users[id]) {
+                users[id].total_cost += total_cost;
+                break;
+            }
+
+            users = {
+                [id]: {
+                    id,
+                    name,
+                    email,
+                    registration,
+                    total_cost,
+                },
+            };
+        }
+
+        return res.status(200).json(users);
     }
 }
 

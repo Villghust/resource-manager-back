@@ -11,18 +11,15 @@ routes.post('/cost', CostController.store);
 
 routes.post('/users', UserController.store);
 routes.get('/users', UserController.list);
+routes.get('/users/cost', UserController.totalCost);
 
 routes.post('/resources', ResourceController.store);
 routes.get('/resources', ResourceController.list);
+routes.get('/resources/cost', ResourceController.totalCost);
 
 routes.post('/reservations', ReservationController.store);
+routes.get('/reservations', ReservationController.list);
 routes.get('/reservations/available', ReservationController.available);
-routes.get('/reservations/list', ReservationController.list);
-routes.get(
-    '/reservations/resources/:resource_id',
-    ReservationController.resources
-);
-routes.get('/reservations/users/:user_id', ReservationController.users);
 routes.delete('/reservations/:reservation_id', ReservationController.delete);
 
 export default routes;

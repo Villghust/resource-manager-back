@@ -1,7 +1,8 @@
 import Yup from 'yup';
 
-import Resource from '../schemas/ResourceSchema.js';
 import Cost from '../schemas/CostSchema.js';
+import Reservation from '../schemas/ReservationSchema.js';
+import Resource from '../schemas/ResourceSchema.js';
 
 import ResourceType from '../enums/ResourceTypeEnum.js';
 
@@ -28,7 +29,7 @@ class ResourceController {
         });
 
         if (!(await schema.isValid(req.body))) {
-            return res.status(400).json({ error: 'Validation fails' });
+            return res.status(400).json({ error: 'Contract validation fails' });
         }
 
         const { type } = req.body;
@@ -68,6 +69,46 @@ class ResourceController {
         }
 
         return res.status(200).json({ resources });
+    }
+
+    async totalCost(req, res) {
+        const reservations = await Reservation.find({}).populate(['resource']);
+
+        let resources = {};
+
+        for (const reservation of reservations) {
+            const { resource, total_cost } = reservation;
+
+            const {
+                id,
+                name,
+                type,
+                cost,
+                size,
+                seat_quantity,
+                seat_cost,
+            } = resource;
+
+            if (resources[id]) {
+                resources[id].total_cost += total_cost;
+                break;
+            }
+
+            resources = {
+                [id]: {
+                    id,
+                    name,
+                    type,
+                    cost,
+                    size,
+                    seat_quantity,
+                    seat_cost,
+                    total_cost,
+                },
+            };
+        }
+
+        return res.status(200).json(resources);
     }
 }
 

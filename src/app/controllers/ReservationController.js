@@ -18,7 +18,7 @@ class ReservationController {
         });
 
         if (!(await schema.isValid(req.body))) {
-            return res.status(400).json({ error: 'Validation fails' });
+            return res.status(400).json({ error: 'Contract validation fails' });
         }
 
         const {
@@ -72,6 +72,36 @@ class ReservationController {
         return res.status(201).json(reservation);
     }
 
+    async list(req, res) {
+        const schema = Yup.object().shape({
+            startDate: Yup.string().nullable(),
+            endDate: Yup.string().nullable(),
+        });
+
+        if (!(await schema.isValid(req.query))) {
+            return res.status(400).json({ error: 'Contract validation fails' });
+        }
+
+        const { startDate, endDate } = req.query;
+
+        let reservations;
+
+        if (startDate && endDate) {
+            reservations = await Reservation.find({
+                $and: [
+                    { startDate: { $gte: startDate } },
+                    { endDate: { $lte: endDate } },
+                ],
+            });
+
+            return res.status(200).json({ reservations });
+        }
+
+        reservations = await Reservation.find({});
+
+        return res.status(200).json({ reservations });
+    }
+
     async available(req, res) {
         const schema = Yup.object().shape({
             type: Yup.string().oneOf(ResourceType.values()).required(),
@@ -80,7 +110,7 @@ class ReservationController {
         });
 
         if (!(await schema.isValid(req.query))) {
-            return res.status(400).json({ error: 'Validation fails' });
+            return res.status(400).json({ error: 'Contract validation fails' });
         }
 
         const { type, startDate, endDate } = req.query;
@@ -130,47 +160,18 @@ class ReservationController {
         return res.status(200).json({ response });
     }
 
-    async list(req, res) {
-        let { startDate, endDate } = req.query;
-
-        // Se tiver startDate e endDate, listamos por periodo. Caso contrário tudo.
-
-        // moment(startDate).isBetween()
-
-        const reservation = await Reservation.find({}).sort({ name: 'asc' });
-
-        return res.status(200).json({ reservation });
-    }
-
-    async resources(req, res) {
-        const { resource_id } = req.params;
-
-        return res.status(200).json({ 'deu bom': true });
-    }
-
-    async users(req, res) {
-        const { user_id } = req.params;
-
-        return res.status(200).json({ 'deu bom': true });
-    }
-
     async delete(req, res) {
-        const reservation = await reservation.findById(
-            req.params.reservation_id
-        );
+        const { reservation_id } = req.params;
 
-        if (!reservation) {
-            return res.status(404).json({ error: 'reservation not found' });
-        }
+        const reservation = await Reservation.findById(reservation_id);
 
-        for (const user of reservation.user_list) {
-            await User.findOneAndUpdate(
-                { email: user.email },
-                { reservation: null }
-            );
-        }
+        if (!reservation)
+            return res.status(404).json({ error: 'Reservation not found' });
 
-        await reservation.deleteOne({ _id: req.params.reservation_id });
+        if (moment().isAfter(reservation.endDate))
+            return res.status(422).json({ error: 'Reservation expired' });
+
+        await Reservation.deleteOne({ _id: reservation_id });
 
         return res.status(200).send();
     }
