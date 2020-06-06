@@ -51,5 +51,6 @@ Entidade que descreve a reserva de equipamentos e suas informações dentro da p
 - Docker.compose
 - Arquivo insomnia
 - Video
+- Relatório
 
 ---

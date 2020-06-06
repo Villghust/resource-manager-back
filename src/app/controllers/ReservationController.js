@@ -1,11 +1,11 @@
-import Yup from 'yup';
 import moment from 'moment';
+import Yup from 'yup';
 
 import ResourceType from '../enums/ResourceTypeEnum.js';
 
 import Cost from '../schemas/CostSchema.js';
 import Reservation from '../schemas/ReservationSchema.js';
-import Resources from '../schemas/ResourceSchema.js';
+import Resource from '../schemas/ResourceSchema.js';
 
 class ReservationController {
     async store(req, res) {
@@ -44,7 +44,7 @@ class ReservationController {
                     'The difference between start date and end date must be greater than 1 day',
             });
 
-        const resource = await Resources.findById(resource_id);
+        const resource = await Resource.findById(resource_id);
 
         let total_cost;
 
@@ -92,72 +92,15 @@ class ReservationController {
                     { startDate: { $gte: startDate } },
                     { endDate: { $lte: endDate } },
                 ],
-            });
-
-            return res.status(200).json({ reservations });
+            }).populate(['resource', 'user']);
+        } else {
+            reservations = await Reservation.find({}).populate([
+                'resource',
+                'user',
+            ]);
         }
-
-        reservations = await Reservation.find({});
 
         return res.status(200).json({ reservations });
-    }
-
-    async available(req, res) {
-        const schema = Yup.object().shape({
-            type: Yup.string().oneOf(ResourceType.values()).required(),
-            startDate: Yup.string().required(),
-            endDate: Yup.string().required(),
-        });
-
-        if (!(await schema.isValid(req.query))) {
-            return res.status(400).json({ error: 'Contract validation fails' });
-        }
-
-        const { type, startDate, endDate } = req.query;
-
-        if (
-            type === ResourceType.FURNITURE &&
-            moment(endDate).diff(moment(startDate), 'days') < 4
-        )
-            return res.status(422).json({
-                error:
-                    'The difference between start date and end date for FURNITURE items must be greater than 4 days',
-            });
-
-        if (moment(endDate).diff(moment(startDate), 'days') < 1)
-            return res.status(422).json({
-                error:
-                    'The difference between start date and end date must be greater than 1 day',
-            });
-
-        const resources = await Resources.find({ type });
-
-        let response = [];
-
-        for (const resource of resources) {
-            const reservations = await Reservation.find({
-                resource: resource.id,
-            });
-
-            let isValid = true;
-
-            for (const r of reservations) {
-                if (moment(startDate).isAfter(r.endDate)) break;
-
-                if (
-                    moment(startDate).isBefore(r.startDate) &&
-                    moment(endDate).isBefore(r.startDate)
-                ) {
-                    break;
-                }
-
-                isValid = false;
-            }
-
-            if (isValid) response.push(resource);
-        }
-
-        return res.status(200).json({ response });
     }
 
     async delete(req, res) {

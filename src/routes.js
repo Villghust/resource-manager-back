@@ -15,11 +15,11 @@ routes.get('/users/cost', UserController.totalCost);
 
 routes.post('/resources', ResourceController.store);
 routes.get('/resources', ResourceController.list);
+routes.get('/resources/available', ResourceController.available);
 routes.get('/resources/cost', ResourceController.totalCost);
 
 routes.post('/reservations', ReservationController.store);
 routes.get('/reservations', ReservationController.list);
-routes.get('/reservations/available', ReservationController.available);
 routes.delete('/reservations/:reservation_id', ReservationController.delete);
 
 export default routes;
