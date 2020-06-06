@@ -21,7 +21,7 @@ const ReservationSchema = new mongoose.Schema(
             required: true,
         },
         endDate: {
-            type: Number,
+            type: Date,
             required: true,
         },
         total_cost: {
