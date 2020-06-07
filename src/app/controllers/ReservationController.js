@@ -44,6 +44,30 @@ class ReservationController {
                     'The difference between start date and end date must be greater than 1 day',
             });
 
+        const reservations = await Reservation.find({
+            resource: resource_id,
+        });
+
+        let isValid = true;
+
+        for (const r of reservations) {
+            if (moment(startDate).isAfter(r.endDate)) break;
+
+            if (
+                moment(startDate).isBefore(r.startDate) &&
+                moment(endDate).isBefore(r.startDate)
+            ) {
+                break;
+            }
+
+            isValid = false;
+        }
+
+        if (!isValid)
+            return res.status(422).json({
+                error: 'This resource has another reservation for the period',
+            });
+
         const resource = await Resource.findById(resource_id);
 
         let total_cost;
