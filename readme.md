@@ -1,3 +1,23 @@
+# Getting Started
+
+Utilize o docker para subir a aplicação.
+
+``` docker-compose up -d --build ```
+
+Para testes manuais, disponibilizamos dentro da pasta raiz do projeto um arquivo `insomnia.json` que pode ser importado no software [Insomnia](https://insomnia.rest/). Neste arquivo deixamos vários exemplos de requisições pré-definidas.
+
+Para popular com alguns dados iniciais, disponibilizamos uma função de seed para o banco de dados. A função sempre limpa completamente o banco e inicia a partir de um estado inicial definido que contém:
+
+- 10 recursos;
+- 5 usuários;
+- variáveis de custo global.
+
+Para utilizar a função, após iniciar o docker, basta abrir o terminal do docker onde está rodando a aplicação e enviar o seguinte comando:
+
+```yarn seed```
+
+# Entidades e rotas (Swagger wannabe)
+
 ## Cost
 
 Entidade que define os valores globais para recursos do tipo PHYSICAL_SPACES.
@@ -45,11 +65,8 @@ Entidade que descreve a reserva de equipamentos e suas informações dentro da p
 
 ---
 
-## ToDo`s
+# ToDo`s
 
-- Mocks Iniciais (5 Colaboradores e 10 Recursos)
-- Docker.compose
-- Arquivo insomnia
 - Video
 - Relatório
 
