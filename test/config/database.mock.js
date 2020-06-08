@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-class Database {
+class DatabaseMock {
     constructor() {
         this.mongo();
     }
@@ -13,4 +13,4 @@ class Database {
     }
 }
 
-export default new Database();
+export default new DatabaseMock();

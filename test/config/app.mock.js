@@ -4,7 +4,7 @@ import routes from '../../src/routes.js';
 
 import './database.mock.js';
 
-class App {
+class AppMock {
     constructor() {
         this.server = express();
         this.middlewares();
@@ -20,4 +20,4 @@ class App {
     }
 }
 
-export default new App().server;
+export default new AppMock().server;
