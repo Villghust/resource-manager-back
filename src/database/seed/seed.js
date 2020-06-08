@@ -1,8 +1,8 @@
 import req from 'supertest';
 
-import data from './data.js';
-
 import app from './app.seed.js';
+import data from './data.js';
+import drop from './database.drop.js';
 
 const request = req(app);
 const seed = data();
@@ -11,6 +11,10 @@ seeding();
 
 async function seeding() {
     try {
+        await drop();
+        console.log('Dropping collections');
+
+        console.log('Seeding data in collections');
         await request.post('/cost').send(seed[0].documents[0]);
         await request.post('/users').send(seed[1].documents[0]);
         await request.post('/users').send(seed[1].documents[1]);
