@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "node",
+            "request": "launch",
+            "name": "Seed",
+            "program": "${workspaceFolder}/src/database/seed/seed.js",
+        },
+        {
+            "type": "node",
             "request": "attach",
             "name": "Attach",
             "restart": true,

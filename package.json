@@ -7,10 +7,10 @@
   "author": "Márcio Santos do Carmo <m.s.carmo@outlook.com>",
   "license": "MIT",
   "scripts": {
+    "seed": "node --inspect src/database/seed/seed.js --exit",
     "dev": "node src/server.js",
     "start": "node --require dotenv/config src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
-    "docker": "node --inspect=0.0.0.0:9229 src/server.js",
     "lint": "eslint --fix src --ext .js",
     "test": "yarn test:unit && yarn test:features",
     "test:unit": "mocha --config test/config/.mocharc.unit.json --reporter mocha-multi-reporters --reporter-options configFile=test/config/reporter.test.config.json --exit",

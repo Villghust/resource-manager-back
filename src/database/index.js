@@ -18,8 +18,11 @@ class Database {
         this.mongoConnection = mongoose.connect(
             process.env.ENVIRONMENT
                 ? connection[process.env.ENVIRONMENT].url
-                : 'mongodb://localhost:27017/resource-manager',
-            { useNewUrlParser: true, useFindAndModify: true }
+                : 'mongodb://db:27017/resource-manager',
+            {
+                useNewUrlParser: true,
+                useFindAndModify: true,
+            }
         );
     }
 }

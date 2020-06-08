@@ -1,0 +1,27 @@
+{
+    "db": {
+        "database": "resource-manager",
+        "servers": [
+            "db:27017"
+        ],
+        "dialect": "mongodb",
+        "collections": {
+            "users": {
+                "name": "users",
+                "version": "1.0"
+            },
+            "resources": {
+                "name": "resources",
+                "version": "1.0"
+            },
+            "reservations": {
+                "name": "reservations",
+                "version": "1.0"
+            },
+            "cost": {
+                "name": "cost",
+                "version": "1.0"
+            }
+        }
+    }
+}

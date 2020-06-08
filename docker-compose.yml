@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+    db:
+        image: mongo
+        restart: always
+        ports:
+            - 27017:27017
+
+    resource-manager-back:
+        image: resource-manager-back
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - db
+        links:
+            - db
+        volumes:
+            - ./scripts/db.json:/home/node/app/scripts/db.json
+        ports:
+            - 3333:3333
+
