@@ -10,6 +10,32 @@
             "name": "Attach",
             "restart": true,
             "protocol": "inspector"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Unit Tests",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "--config",
+                "test/config/.mocharc.unit.json",
+                "--exit"
+            ],
+            "cwd": "${workspaceRoot}",
+            "internalConsoleOptions": "openOnSessionStart"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Feature Tests",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+            "args": [
+                "--config",
+                "test/config/.mocharc.features.json",
+                "--exit"
+            ],
+            "cwd": "${workspaceRoot}",
+            "internalConsoleOptions": "openOnSessionStart"
         }
     ]
 }

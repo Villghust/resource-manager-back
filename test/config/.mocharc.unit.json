@@ -1,0 +1,9 @@
+{
+    "extension": ["js"],
+    "file": "test/config/setup.js",
+    "spec": "test/unit/**/*.spec.js",
+    "timeout": 10000,
+    "color": true,
+    "ui": "bdd",
+    "reporter": "min"
+  }

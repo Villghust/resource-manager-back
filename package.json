@@ -14,10 +14,10 @@
     "lint": "eslint --fix src --ext .js",
     "test": "yarn test:all",
     "test:all": "yarn test:unit && yarn test:features",
-    "test:unit": "mocha --config test/.mocharc.unit.json --reporter mocha-multi-reporters --reporter-options configFile=test/reporter.test.config.json --exit",
-    "test:features": "mocha --config test/.mocharc.features.json --reporter mocha-multi-reporters --reporter-options configFile=test/reporter.test.config.json --exit",
-    "coverage": "nyc mocha --config test/.mocharc.unit.json --reporter mocha-multi-reporters --exit",
-    "coverage:details": "nyc --reporter=text mocha --config test/.mocharc.unit.json --reporter mocha-multi-reporters --exit"
+    "test:unit": "mocha --config test/config/.mocharc.unit.json --reporter mocha-multi-reporters --reporter-options configFile=test/config/reporter.test.config.json --exit",
+    "test:features": "mocha --config test/config/.mocharc.features.json --reporter mocha-multi-reporters --reporter-options configFile=test/config/reporter.test.config.json --exit",
+    "coverage": "nyc mocha --config test/config/.mocharc.unit.json --reporter mocha-multi-reporters --exit",
+    "coverage:details": "nyc --reporter=text mocha --config test/config/.mocharc.unit.json --reporter mocha-multi-reporters --exit"
   },
   "dependencies": {
     "cors": "^2.8.5",
