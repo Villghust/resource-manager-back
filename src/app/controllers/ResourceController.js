@@ -156,7 +156,7 @@ class ResourceController {
                 break;
             }
 
-            resources = {
+            Object.assign(resources, {
                 [id]: {
                     id,
                     name,
@@ -167,7 +167,7 @@ class ResourceController {
                     seat_cost,
                     total_cost,
                 },
-            };
+            });
         }
 
         return res.status(200).json(resources);

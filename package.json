@@ -10,7 +10,14 @@
     "dev": "node src/server.js",
     "start": "node --require dotenv/config src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
-    "lint": "eslint --fix src --ext .js"
+    "docker": "node --inspect=0.0.0.0:9229 src/server.js",
+    "lint": "eslint --fix src --ext .js",
+    "test": "yarn test:all",
+    "test:all": "yarn test:unit && yarn test:features",
+    "test:unit": "mocha --config test/.mocharc.unit.json --reporter mocha-multi-reporters --reporter-options configFile=test/reporter.test.config.json --exit",
+    "test:features": "mocha --config test/.mocharc.features.json --reporter mocha-multi-reporters --reporter-options configFile=test/reporter.test.config.json --exit",
+    "coverage": "nyc mocha --config test/.mocharc.unit.json --reporter mocha-multi-reporters --exit",
+    "coverage:details": "nyc --reporter=text mocha --config test/.mocharc.unit.json --reporter mocha-multi-reporters --exit"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -18,13 +25,21 @@
     "express": "^4.17.1",
     "moment": "^2.26.0",
     "mongoose": "^5.9.9",
+    "supertest": "^4.0.2",
     "yup": "^0.28.3"
   },
   "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-change": "^2.1.2",
+    "dirty-chai": "^2.0.1",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.3",
+    "mocha": "^7.2.0",
+    "mocha-junit-reporter": "^2.0.0",
+    "mocha-multi-reporters": "^1.1.7",
     "nodemon": "^2.0.3",
+    "nyc": "^15.1.0",
     "prettier": "^2.0.4"
   }
 }

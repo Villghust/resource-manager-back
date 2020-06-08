@@ -54,7 +54,7 @@ class UserController {
                 break;
             }
 
-            users = {
+            Object.assign(users, {
                 [id]: {
                     id,
                     name,
@@ -62,7 +62,7 @@ class UserController {
                     registration,
                     total_cost,
                 },
-            };
+            });
         }
 
         return res.status(200).json(users);
