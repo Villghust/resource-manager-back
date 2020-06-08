@@ -1,5 +1,7 @@
 # Getting Started
 
+**NECESSÁRIO O USO DO DOCKER**
+
 Utilize o docker para subir a aplicação.
 
 ``` docker-compose up -d --build ```
@@ -15,6 +17,32 @@ Para popular com alguns dados iniciais, disponibilizamos uma função de seed pa
 Para utilizar a função, após iniciar o docker, basta abrir o terminal do docker onde está rodando a aplicação e enviar o seguinte comando:
 
 ```yarn seed```
+
+---
+
+**APENAS EM AMBIENTE DE DESENVOLVIMENTO:**
+
+**NECESSÁRIO O USO DO DOCKER E DO YARN**
+
+Primeiro, inicie uma instância do banco de dados com seu docker:
+
+```docker run --name resource-manager -p 27017:27017 -d -t mongo```
+
+Clone este repositório em sua máquina instale as dependências:
+
+```yarn install```
+
+Para rodar os testes unitários, utilize o script:
+
+```yarn test:unit```
+
+Para rodar os testes de feature, utilize o script:
+
+```yarn test:features```
+
+Para rodar ambos testes unitários e de feature, utilize o script:
+
+```yarn test```
 
 # Entidades e rotas (Swagger wannabe)
 
