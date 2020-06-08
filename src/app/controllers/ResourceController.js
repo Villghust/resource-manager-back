@@ -169,7 +169,7 @@ class ResourceController {
             }
         }
 
-        return res.status(200).json(resources);
+        return res.status(200).json(Object.values(resources));
     }
 }
 

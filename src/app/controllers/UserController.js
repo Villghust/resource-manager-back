@@ -64,7 +64,7 @@ class UserController {
             }
         }
 
-        return res.status(200).json(users);
+        return res.status(200).json(Object.values(users));
     }
 }
 
