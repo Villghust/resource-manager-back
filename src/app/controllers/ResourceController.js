@@ -153,21 +153,20 @@ class ResourceController {
 
             if (resources[id]) {
                 resources[id].total_cost += total_cost;
-                break;
+            } else {
+                Object.assign(resources, {
+                    [id]: {
+                        id,
+                        name,
+                        type,
+                        cost,
+                        size,
+                        seat_quantity,
+                        seat_cost,
+                        total_cost,
+                    },
+                });
             }
-
-            Object.assign(resources, {
-                [id]: {
-                    id,
-                    name,
-                    type,
-                    cost,
-                    size,
-                    seat_quantity,
-                    seat_cost,
-                    total_cost,
-                },
-            });
         }
 
         return res.status(200).json(resources);

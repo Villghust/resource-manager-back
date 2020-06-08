@@ -51,18 +51,17 @@ class UserController {
 
             if (users[id]) {
                 users[id].total_cost += total_cost;
-                break;
+            } else {
+                Object.assign(users, {
+                    [id]: {
+                        id,
+                        name,
+                        email,
+                        registration,
+                        total_cost,
+                    },
+                });
             }
-
-            Object.assign(users, {
-                [id]: {
-                    id,
-                    name,
-                    email,
-                    registration,
-                    total_cost,
-                },
-            });
         }
 
         return res.status(200).json(users);
