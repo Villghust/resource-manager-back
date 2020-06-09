@@ -9,7 +9,7 @@ COPY src/database/seed /home/node/app
 
 USER node
 
-RUN yarn install && yarn seed
+RUN yarn install && yarn seed-container
 
 COPY --chown=node:node . .
 
