@@ -8,7 +8,7 @@ COPY package.json /home/node/app
 
 USER node
 
-RUN yarn install && yarn seed
+RUN yarn install
 
 COPY --chown=node:node . .
 
