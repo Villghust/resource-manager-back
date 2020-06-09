@@ -8,15 +8,9 @@ Utilize o docker para subir a aplicação.
 
 Para testes manuais, disponibilizamos dentro da pasta raiz do projeto um arquivo `insomnia.json` que pode ser importado no software [Insomnia](https://insomnia.rest/). Neste arquivo deixamos vários exemplos de requisições pré-definidas.
 
-Para popular com alguns dados iniciais, disponibilizamos uma função de seed para o banco de dados. A função sempre limpa completamente o banco e inicia a partir de um estado inicial definido que contém:
+Ao executar o comando `docker-compose` citado acima, o sistema já inicializa com os mocks iniciais de 5 usuários e 10 recursos, além de configurar globalmente o preço para os espaços físicos.
 
-- 10 recursos;
-- 5 usuários;
-- variáveis de custo global.
-
-Para utilizar a função, após iniciar o docker, basta abrir o terminal do docker onde está rodando a aplicação e enviar o seguinte comando:
-
-```yarn seed```
+Ao reiniciar o container, o comando `docker-compose` citado acima apaga todas as collections do banco de dados e recria as já mockadas pelo grupo.
 
 ---
 
@@ -90,12 +84,5 @@ Entidade que descreve a reserva de equipamentos e suas informações dentro da p
 - *List*: Método responsável por trazer as informações de todas as reservas e reservas por período (Passado ou Futuro).
 - *Available*: Método responsável por trazer informações de lacunas de reservas possíveis por tipo de recurso.
 - *Delete*: Método responsável por cancelar uma reserva.
-
----
-
-# ToDo`s
-
-- Video
-- Relatório
 
 ---
