@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "seed": "node --inspect src/database/seed/seed.js --exit",
+    "docker": "yarn seed && yarn dev:debug",
     "dev": "node src/server.js",
     "start": "node --require dotenv/config src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
