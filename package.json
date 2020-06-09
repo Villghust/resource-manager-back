@@ -8,7 +8,6 @@
   "license": "MIT",
   "scripts": {
     "seed": "node --inspect src/database/seed/seed.js --exit",
-    "seed-container": "node --inspect database/seed/seed.js --exit",
     "dev": "node src/server.js",
     "start": "node --require dotenv/config src/server.js",
     "dev:debug": "nodemon --inspect src/server.js",
